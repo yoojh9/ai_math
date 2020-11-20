@@ -66,6 +66,19 @@ plt.show()
 
 
 # 5. 군집화 결과 시각화
+a=0
+b=0
+c=0
+for cluster in clusters:
+    if(cluster==0):
+        a=a+1
+    elif(cluster==1):
+        b=b+1
+    else:
+        c=c+1
+
+print('a=',a,',b=',b,'c=',c)
+print(clusters[0])
 plt.scatter(X[clusters==0,0], X[clusters==0,1], s=50, c='red', marker='o', edgecolor='black', label='A')
 plt.scatter(X[clusters==1,0], X[clusters==1,1], s=50, c='yellow', marker='x', edgecolor='black', label='B')
 plt.scatter(X[clusters==2,0], X[clusters==2,1], s=50, c='blue', marker='^', edgecolor='black', label='C')
