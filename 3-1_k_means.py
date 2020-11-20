@@ -1,3 +1,5 @@
+## scikit-learn 모듈을 이용하여 K-Menas 모델을 적용할 수도 있음
+
 # 1. 데이터 불러오기
 import pandas as pd 
 fifa2020 = pd.read_csv('data/players_20.csv')
@@ -30,7 +32,6 @@ C_old = np.zeros(C.shape)
 clusters = np.zeros(len(X))
 flag = Distance(C, C_old)
 print(C_old)
-print('flag1=',flag)
 
 distances = []
 while flag != 0:
@@ -63,9 +64,14 @@ plt.legend(loc='best')
 plt.grid()
 plt.show()
 
+
+# 5. 군집화 결과 시각화
 plt.scatter(X[clusters==0,0], X[clusters==0,1], s=50, c='red', marker='o', edgecolor='black', label='A')
 plt.scatter(X[clusters==1,0], X[clusters==1,1], s=50, c='yellow', marker='x', edgecolor='black', label='B')
 plt.scatter(X[clusters==2,0], X[clusters==2,1], s=50, c='blue', marker='^', edgecolor='black', label='C')
+
+## 군집의 중심 좌표
+plt.scatter(C[:,0], C[:,1], s=250, marker='*', c='black', edgecolor='black', label='Centroids')
 plt.legend()
 plt.grid()
 plt.show()
