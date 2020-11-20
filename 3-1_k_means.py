@@ -24,25 +24,31 @@ print(C)
 from copy import deepcopy
 
 def Distance(A,B):
-    return np.sqrt(np.sum(np.power((A-B),2))) # 유클리디안 거리 계산 함수
+    return np.sqrt(np.sum(np.power((A-B), 2))) # 유클리디안 거리 계산 함수
 
 C_old = np.zeros(C.shape)
-cluster = np.zeros(len(X))
+clusters = np.zeros(len(X))
 flag = Distance(C, C_old)
 print(C_old)
-print(flag)
+print('flag1=',flag)
 
 distances = []
 while flag != 0:
-    for i in range(len(X))
+    for i in range(len(X)):
         for j in range(3):
             temp = Distance(X[i], C[j])
-            distnaces.append(temp)
-        cluster = np.argmin(distances)
+            distances.append(temp)
+        cluster = np.argmin(distances)      # argmin(): 최소값을 가지는 값의 인덱스 번호를 리턴
         clusters[i] = cluster
         distances = []
-    C_old = deepcopy(C)
 
+    C_old = deepcopy(C)
+    
+    for i in range(k):
+        points = [X[j] for j in range(len(X)) if clusters[j] == i]
+        C[i] = np.mean(points)
+    
+    flag = Distance(C,C_old)
 
 # 4. 데이터 시각화하기
 import matplotlib.pyplot as plt 
@@ -57,3 +63,9 @@ plt.legend(loc='best')
 plt.grid()
 plt.show()
 
+plt.scatter(X[clusters==0,0], X[clusters==0,1], s=50, c='red', marker='o', edgecolor='black', label='A')
+plt.scatter(X[clusters==1,0], X[clusters==1,1], s=50, c='yellow', marker='x', edgecolor='black', label='B')
+plt.scatter(X[clusters==2,0], X[clusters==2,1], s=50, c='blue', marker='^', edgecolor='black', label='C')
+plt.legend()
+plt.grid()
+plt.show()
